@@ -1,20 +1,17 @@
 from PIL import Image
 import pytesseract
 
-#when pytesseract does not find Tesseract installation automatically
+#setting path for tesseract
 pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
 
-image_path = 'sampleimg1.png' #image file
-img = Image.open(image_path)
+image_path = "sampleimg1.png"
+img = Image.open(image_path) #opening image using Pillow
+extracted_text = pytesseract.image_to_string(img)
 
-extracted_text = pytesseract.image_to_string(img) #the text extract
-
-with open("extracted_text.txt", "w") as file:
+output_file = "extracted_text.txt"
+with open(output_file, "w") as file:
     file.write(extracted_text)
 
-print("\nTEXT SUCCESSFULLY SAVED: ")
-
-with open("extract_text.txt","+r") as output:
-   display = output.read()
-
-print(display)
+print("ETRACTED FILE SAVED TO: ", output_file)
+print("\n-------ETRACTED TEXT---------\n")
+print(extracted_text)
